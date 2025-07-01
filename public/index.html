@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Ambatukam - Hitam Legam Legenda Rodok 😋</title>
+    <meta name="description" content="Ambatukam, sosok misterius legendaris dengan gaya khas hitam legam dan hobi rodok-rodok 😋.">
+    <meta name="keywords" content="Ambatukam, Meme, Legenda Hitam Legam, Rodok Rodok, Sosok Viral, Humor, Parodi">
+    <meta name="author" content="Ambatukam Enterprises">
+    
+    <link rel="icon" href="https://files.catbox.moe/m5yxvg.jpg" type="image/jpeg">
+    
+    <meta property="og:title" content="Ambatukam - Hitam Legam Legenda Rodok 😋">
+    <meta property="og:description" content="Kenali Ambatukam, tokoh ikonik dengan karisma gelap dan aksi rodok tiada tanding 😋.">
+    <meta property="og:image" content="https://files.catbox.moe/m5yxvg.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://namasitusanda.com">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="bg-blur"></div>
+    
+    <div class="container">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        
+        <header>
+            <div class="avatar-container">
+                <img src="" alt="Profile" class="avatar" id="profileImage">
+            </div>
+            <h1 class="username" id="profileName">Ambatukam</h1>
+            <p class="bio" id="profileBio">suka rodok rodok 😋</p>
+        </header>
+        
+        <div class="links" id="linkContainer">
+            <!-- Links will be generated from config.js -->
+        </div>
+        
+        <div class="social-links" id="socialContainer">
+            <!-- Social links will be generated from config.js -->
+        </div>
+        
+        <footer>
+            © <span id="currentYear"></span> <span id="copyrightName">Ambatukam</span>. All rights reserved.
+        </footer>
+    </div>
+
+    <div class="watermark">
+        Made by VynaaValerie 
+    </div>
+
+    <script src="vynaa.js"></script>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        
+        // Apply the saved theme
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+        
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 15 : 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 5px and 15px
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * -20;
+                particle.style.animation = `float ${duration}s ${delay}s infinite ease-in-out`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Load SweetAlert if not already loaded
+            if (typeof Swal === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
+                document.head.appendChild(script);
+            }
+        });
+    </script>
+</body>
+</html>
