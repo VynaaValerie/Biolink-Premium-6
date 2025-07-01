@@ -20,13 +20,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="dark">
     <div class="particles" id="particles"></div>
     <div class="bg-blur"></div>
     
     <div class="container">
         <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
         </button>
         
         <header>
@@ -54,15 +54,15 @@
         Made by VynaaValerie 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vynaa.js"></script>
     <script>
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         
-        // Check for saved theme preference or use preferred color scheme
-        const savedTheme = localStorage.getItem('theme') || 
-                          (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
         
         // Apply the saved theme
         body.setAttribute('data-theme', savedTheme);
@@ -81,11 +81,11 @@
         function updateThemeIcon(theme) {
             const icon = themeToggle.querySelector('i');
             if (theme === 'dark') {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            } else {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
             }
         }
         
@@ -122,13 +122,6 @@
             
             // Set current year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Load SweetAlert if not already loaded
-            if (typeof Swal === 'undefined') {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
-                document.head.appendChild(script);
-            }
         });
     </script>
 </body>
